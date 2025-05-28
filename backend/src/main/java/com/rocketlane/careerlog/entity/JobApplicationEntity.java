@@ -43,7 +43,7 @@ public class JobApplicationEntity {
 
     private String source;
 
-    @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name = "username", referencedColumnName = "username")
+//    private UserEntity user;
 }

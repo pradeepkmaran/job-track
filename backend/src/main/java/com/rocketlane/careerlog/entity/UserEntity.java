@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserEntity {
     @Id
-    @Column(length = 255)
+    @Column(length = 255, nullable = false)
     private String username;
 
     @Column(nullable = false)
@@ -26,7 +26,6 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OwnershipEntity> ownerships = new ArrayList<>();
-
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<OwnershipEntity> ownerships = new ArrayList<>();
 }
