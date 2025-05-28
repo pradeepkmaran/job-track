@@ -1,14 +1,13 @@
-.login-page {
-  margin: 0;
+.signup-page {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #43cea2, #185a9d); /* Green/blue gradient */
   font-family: Arial, sans-serif;
 }
 
-.login-box {
+.signup-box {
   background: white;
   padding: 40px 30px;
   border-radius: 12px;
@@ -17,13 +16,13 @@
   text-align: center;
 }
 
-.login-title {
+.signup-title {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
 }
 
-.login-label {
+.signup-label {
   display: block;
   text-align: left;
   margin-bottom: 5px;
@@ -31,7 +30,7 @@
   color: #444;
 }
 
-.login-input {
+.signup-input {
   width: 90%;
   padding: 10px;
   margin-bottom: 15px;
@@ -40,35 +39,23 @@
   font-size: 14px;
 }
 
-.login-button {
+.signup-button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(90deg, #43e97b, #38f9d7);
+  background: linear-gradient(90deg, #ff758c, #ff7eb3); /* pink gradient */
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 1s ease;
+  transition: background 0.3s ease;
 }
 
-.login-button:hover {
-  background: linear-gradient(90deg, #38f9d7, #43e97b);
+.signup-button:hover {
+  background: linear-gradient(90deg, #ff7eb3, #ff758c);
 }
 
-.toggle-link {
-  display: block;
-  margin: 15px 0;
-  font-size: 13px;
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.toggle-link:hover {
-  text-decoration: underline;
-}
-
-.login-error {
+.signup-error {
   color: red;
   margin-bottom: 10px;
   font-size: 14px;

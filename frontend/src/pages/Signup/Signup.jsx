@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess } from '../../store/authSlice';
+import './Signup.css';
+import { isValidEmail, isValidPassword, passwordValidationErrors } from '../../utils/validateUtils';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,21 @@ const SignupPage = () => {
 
   const handleSignup = async () => {
     try {
+      if(username==="" || password==="" || email==="") {
+        setError('Fields cannot be empty');
+        return;
+      }
+
+      if(!isValidEmail(email)) {
+        setError('Not a valid Email');
+        return;
+      }
+
+      if(!isValidPassword(password)) {
+        setError(passwordValidationErrors(password));
+        return;
+      }
+
       const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/signup/new`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -35,46 +52,46 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <div className="signup-page">
+      <div className="signup-box">
+        <h2 className="signup-title">Sign Up</h2>
 
-      <label>Username:</label>
-      <br />
-      <input
-        placeholder="Choose a username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br /><br />
+        <label className="signup-label">Username:</label>
+        <input
+          className="signup-input"
+          placeholder="Choose a username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-      <label>Email:</label>
-      <br />
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br /><br />
+        <label className="signup-label">Email:</label>
+        <input
+          className="signup-input"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <label>Password:</label>
-      <br />
-      <input
-        type="password"
-        placeholder="Create a password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br /><br />
+        <label className="signup-label">Password:</label>
+        <input
+          className="signup-input"
+          type="password"
+          placeholder="Create a password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      {error && (
-        <>
-          <strong style={{ color: 'red' }}>{error}</strong>
-          <br /><br />
-        </>
-      )}
+        {error && <div className="signup-error">{error}</div>}
 
-      <button onClick={handleSignup}>Sign Up</button>
+        <a href="/login" className="toggle-link">
+          Already have an account? Login
+        </a>
+
+        <button className="signup-button" onClick={handleSignup}>
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };

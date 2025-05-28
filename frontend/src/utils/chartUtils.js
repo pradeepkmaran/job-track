@@ -1,10 +1,9 @@
-
 export function getMonthlyCounts(data) {
   const counts = {};
 
   data.forEach((item) => {
-    if (!item.date_applied) return;
-    const date = new Date(item.date_applied);
+    if (!item.dateApplied) return;
+    const date = new Date(item.dateApplied);
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 
     counts[monthKey] = (counts[monthKey] || 0) + 1;
@@ -26,13 +25,13 @@ export function getWeeklyCounts(data) {
     const week1 = new Date(tmpDate.getFullYear(), 0, 4);
     const weekNumber = 1 + Math.round(((tmpDate.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
     const year = tmpDate.getFullYear();
-    
+
     return { year, weekNumber };
   }
 
   data.forEach((item) => {
-    if (!item.date_applied) return;
-    const date = new Date(item.date_applied);
+    if (!item.dateApplied) return;
+    const date = new Date(item.dateApplied);
     const { year, weekNumber } = getISOWeekYear(date);
     const weekKey = `${year}-W${String(weekNumber).padStart(2, '0')}`;
 
@@ -48,8 +47,8 @@ export function getYearlyCounts(data) {
   const counts = {};
 
   data.forEach((item) => {
-    if (!item.date_applied) return;
-    const date = new Date(item.date_applied);
+    if (!item.dateApplied) return;
+    const date = new Date(item.dateApplied);
     const year = date.getFullYear();
 
     counts[year] = (counts[year] || 0) + 1;
@@ -80,7 +79,6 @@ export function aggregateBySourceAndStatus(applications) {
   applications.forEach((appl) => {
     let source = appl.source;
     let status = appl.status;
-    console.log({source, status});
     if (!source) {
       source = "Unknown";
     }

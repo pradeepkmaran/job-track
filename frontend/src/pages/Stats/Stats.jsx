@@ -6,7 +6,7 @@ import StatBarChart from "../../components/ui/statBarChart/statBarChart";
 import './Stats.css';
 
 const Stats = () => {
-  const user = useSelector((state) => state.auth.user); // ✅ get user from Redux
+  const user = useSelector((state) => state.auth.user);
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Stats = () => {
 
   return (
     <div className="stats-layout-wrapper">
-      <div className="chart-card">
+      <div className="chart-card-large">
         <h2>Application Timeline</h2>
         <StatAreaChart data={applications} />
       </div>

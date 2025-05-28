@@ -39,7 +39,7 @@ const StatAreaChart = ({ data }) => {
   }, [data, view]);
 
   return (
-    <div style={{ width: "100%", maxWidth: 700, margin: "0 auto" }}>
+    <div style={{ width: "100%", margin: "0 auto" }}>
       <select
         value={view}
         onChange={(e) => setView(e.target.value)}
