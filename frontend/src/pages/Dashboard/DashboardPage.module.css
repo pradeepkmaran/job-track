@@ -1,0 +1,100 @@
+.DashboardPage {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  min-height: 70vh;
+}
+
+.addButton {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 1px 4px rgba(37,99,235,0.08);
+}
+
+.addButton:hover {
+  background: #1d4ed8;
+}
+
+.applicationList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.applicationCard {
+  background: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  padding: 22px 20px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.status {
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.95em;
+  font-weight: 600;
+  background: #e5e7eb;
+  color: #222;
+  text-transform: capitalize;
+}
+
+.status.notapplied { background: #f3f4f6; color: #6b7280; }
+.status.applied { background: #dbeafe; color: #2563eb; }
+.status.interviewed { background: #fef9c3; color: #b45309; }
+.status.offer { background: #dcfce7; color: #15803d; }
+.status.rejected { background: #fee2e2; color: #b91c1c; }
+
+.cardDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-size: 0.98em;
+}
+
+.cardNotes {
+  margin-top: 8px;
+  font-size: 0.97em;
+  color: #374151;
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 700px) {
+  .DashboardPage {
+    padding: 12px 2vw;
+    margin: 16px 0 0 0;
+    border-radius: 0;
+  }
+  .addButton {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1rem;
+  }
+  .applicationList {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

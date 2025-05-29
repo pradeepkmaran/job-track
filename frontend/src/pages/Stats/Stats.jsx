@@ -12,7 +12,6 @@ import './Stats.css';
 
 const Stats = () => {
   const user = useSelector((state) => state.auth.user);
-  
     const dispatch = useDispatch();
     const navigate = useNavigate();
   const [applications, setApplications] = useState([]);
@@ -80,11 +79,6 @@ const Stats = () => {
         <h2>Source and Status Distribution</h2>
         <SourceStatusBarChart data={applications} />
       </div>
-      <div className="chart-card">
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-
-
     </div>
   );
 };

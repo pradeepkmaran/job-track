@@ -43,6 +43,7 @@ function ApplicationDetailsPage() {
           </p>
           <p><strong>Pay:</strong> ${application.pay}</p>
           <p><strong>Deadline to Apply:</strong> {application.deadline_to_apply || 'N/A'}</p>
+          <p><strong>Source:</strong> {application.source}</p>
           <p><strong>Notes:</strong> {application.notes}</p>
 
           <button onClick = { () => handleEdit(application.id) }>Edit</button>
