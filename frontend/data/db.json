@@ -1,0 +1,40 @@
+{
+    "applications": [
+  {
+    "id": 1,
+    "company_name": "TechCorp",
+    "location": "San Francisco, CA",
+    "date_applied": "2025-05-10",
+    "status": "Applied",
+    "role": "Software Engineer",
+    "career_site_link": "https://techcorp.com/careers/12345",
+    "pay": 120000.00,
+    "deadline_to_apply": null,
+    "notes": "Submitted resume and cover letter. Waiting to hear back."
+  },
+  {
+    "id": 2,
+    "company_name": "InnoWare",
+    "location": "Remote",
+    "date_applied": "2025-05-12",
+    "status": "Interview",
+    "role": "Frontend Developer",
+    "career_site_link": "https://innoware.io/jobs/frontend-developer",
+    "pay": 95000.00,
+    "deadline_to_apply": null,
+    "notes": "Had initial phone screen. Technical interview scheduled."
+  },
+  {
+    "id": 3,
+    "company_name": "CloudNet",
+    "location": "New York, NY",
+    "date_applied": null,
+    "status": "Interested",
+    "role": "DevOps Engineer",
+    "career_site_link": "https://cloudnet.com/careers/devops-engineer",
+    "pay": null,
+    "deadline_to_apply": "2025-06-01",
+    "notes": "Need to tailor resume before applying."
+  }
+]
+}
