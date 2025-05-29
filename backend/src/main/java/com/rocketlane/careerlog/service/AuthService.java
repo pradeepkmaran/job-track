@@ -3,10 +3,8 @@ package com.rocketlane.careerlog.service;
 import com.rocketlane.careerlog.dto.UserDTO;
 import com.rocketlane.careerlog.entity.UserEntity;
 import com.rocketlane.careerlog.repository.UserRepository;
-import com.rocketlane.careerlog.utils.LoginRequest;
-import com.rocketlane.careerlog.utils.LoginResponse;
-import com.rocketlane.careerlog.utils.SignupRequest;
-import com.rocketlane.careerlog.utils.SignupResponse;
+import com.rocketlane.careerlog.utils.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -73,5 +71,10 @@ public class AuthService {
             return new LoginResponse(true, "ok",  new UserDTO(user.getUsername(), user.getEmail()));
         }
         return new LoginResponse(false, "Wrong password", null);
+    }
+
+    public LogoutResponse logoutUser(HttpSession session) {
+        session.invalidate();
+        return new LogoutResponse(null, null);
     }
 }

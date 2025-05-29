@@ -20,6 +20,9 @@ public class JobApplicationController {
 
     @GetMapping("/all")
     public ResponseEntity<List<JobApplicationDTO>> getAllApplications(@RequestParam(value = "username", required = true) String username) {
+
+        System.out.println(username);
+        System.out.println(jobApplicationService.getAllApplications(username));
         return ResponseEntity.ok(jobApplicationService.getAllApplications(username));
     }
 
