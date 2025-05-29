@@ -2,8 +2,8 @@ export function getMonthlyCounts(data) {
   const counts = {};
 
   data.forEach((item) => {
-    if (!item.dateApplied) return;
-    const date = new Date(item.dateApplied);
+    if (!item.date_applied) return;
+    const date = new Date(item.date_applied);
     const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 
     counts[monthKey] = (counts[monthKey] || 0) + 1;
@@ -30,8 +30,8 @@ export function getWeeklyCounts(data) {
   }
 
   data.forEach((item) => {
-    if (!item.dateApplied) return;
-    const date = new Date(item.dateApplied);
+    if (!item.date_applied) return;
+    const date = new Date(item.date_applied);
     const { year, weekNumber } = getISOWeekYear(date);
     const weekKey = `${year}-W${String(weekNumber).padStart(2, '0')}`;
 
@@ -47,8 +47,8 @@ export function getYearlyCounts(data) {
   const counts = {};
 
   data.forEach((item) => {
-    if (!item.dateApplied) return;
-    const date = new Date(item.dateApplied);
+    if (!item.date_applied) return;
+    const date = new Date(item.date_applied);
     const year = date.getFullYear();
 
     counts[year] = (counts[year] || 0) + 1;
@@ -100,11 +100,24 @@ export function getSortedOffers(data) {
   if (!Array.isArray(data)) return [];
 
   const filteredOffers = data.filter(
-    (offer) => offer.pay !== undefined && offer.companyName && offer.status==='Offer'
+    (offer) => offer.pay !== undefined && offer.company_name && offer.status==='Offer'
   );
 
   filteredOffers.sort((a, b) => b.pay - a.pay);
 
   filteredOffers.length=5;
   return filteredOffers;
+}
+
+export function getApplicationsByDates(data) {
+  if (!Array.isArray(data)) return [];
+
+  const filteredData = data.filter(
+    (offer) => offer.date_applied !== undefined
+  );
+
+  filteredData.sort((a, b) => new Date(b.date_applied) - new Date(a.date_applied));
+
+  filteredData.length=5;
+  return filteredData;
 }

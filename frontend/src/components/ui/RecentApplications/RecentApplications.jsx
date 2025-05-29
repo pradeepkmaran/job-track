@@ -1,8 +1,7 @@
-import React from 'react';
-import { getSortedOffers } from '../../../utils/chartUtils'; 
+import { getApplicationsByDates } from '../../../utils/chartUtils'; 
 
-const OfferPayList = ({ data }) => {
-  const offers = getSortedOffers(data);
+const RecentApplications = ({ data }) => {
+  const offers = getApplicationsByDates(data);
 
   if (!offers || offers.length === 0) {
     return <p>No offers available.</p>;
@@ -30,7 +29,7 @@ const OfferPayList = ({ data }) => {
               </div>
             </div>
             <div style={{ fontWeight: 'bold', color: '#2a9d8f' }}>
-              ₹{offer.pay?.toLocaleString('en-IN') || 'N/A'}
+              {new Date(offer.date_applied).toLocaleDateString('en-IN')}
             </div>
           </li>
         ))}
@@ -39,4 +38,4 @@ const OfferPayList = ({ data }) => {
   );
 };
 
-export default OfferPayList;
+export default RecentApplications;
