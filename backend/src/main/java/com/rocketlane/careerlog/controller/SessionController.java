@@ -22,7 +22,7 @@ public class  SessionController {
         return ResponseEntity.ok(sessionService.getSessionDetails(session));
     }
 
-    @PostMapping("/destroy")
+    @PostMapping("/logout")
     public ResponseEntity<?> invalidateSession(HttpSession session) {
         return ResponseEntity.ok(sessionService.invalidateSession(session));
     }

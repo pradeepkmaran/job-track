@@ -15,6 +15,9 @@ public class OwnershipMapper {
 
     public static OwnershipEntity toEntity(OwnershipDTO dto, UserEntity user, JobApplicationEntity jobApplication) {
         OwnershipEntity entity = new OwnershipEntity();
+
+        OwnershipId id = new OwnershipId(dto.getUsername(), dto.getApplicationId());
+        entity.setId(id);
         entity.setUser(user);
         entity.setJobApplication(jobApplication);
         return entity;
