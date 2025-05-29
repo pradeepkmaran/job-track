@@ -14,7 +14,9 @@ import {
   getYearlyCounts,
 } from "../../../utils/chartUtils";
 
-const StatAreaChart = ({ data }) => {
+import './TimelineAreaChart.css';
+
+const TimelineAreaChart = ({ data }) => {
   const [view, setView] = useState("weekly");
   const [chartData, setChartData] = useState([]);
 
@@ -68,4 +70,4 @@ const StatAreaChart = ({ data }) => {
   );
 };
 
-export default StatAreaChart;
+export default TimelineAreaChart;

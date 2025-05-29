@@ -96,3 +96,15 @@ export function aggregateBySourceAndStatus(applications) {
   return Object.values(sourceStatusMap);
 }
 
+export function getSortedOffers(data) {
+  if (!Array.isArray(data)) return [];
+
+  const filteredOffers = data.filter(
+    (offer) => offer.pay !== undefined && offer.companyName && offer.status==='Offer'
+  );
+
+  filteredOffers.sort((a, b) => b.pay - a.pay);
+
+  filteredOffers.length=5;
+  return filteredOffers;
+}

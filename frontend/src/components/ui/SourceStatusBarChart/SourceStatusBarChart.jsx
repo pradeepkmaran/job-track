@@ -20,7 +20,7 @@ const statusColors = {
 
 const statuses = Object.keys(statusColors);
 
-const StatBarChart = ({ data }) => {
+const SourceStatusBarChart = ({ data }) => {
   const chartData = aggregateBySourceAndStatus(data);
 
   return (
@@ -49,4 +49,4 @@ const StatBarChart = ({ data }) => {
   );
 };
 
-export default StatBarChart;
+export default SourceStatusBarChart;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess } from '../../store/authSlice';
-import { isValidEmail } from '../../utils/validateUtils';
+import { isValidEmail } from '../../utils/validationUtils';
 import './Login.css';
 
 const LoginPage = () => {
@@ -38,12 +38,11 @@ const LoginPage = () => {
       : { username: identifier, email: '', password };
 
     try {
-      const resp = await fetch(
-        `${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/login`,
-        {
+      const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/login`, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(credentials),
+          credentials: 'include'
         }
       );
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess } from '../../store/authSlice';
 import './Signup.css';
-import { isValidEmail, isValidPassword, passwordValidationErrors } from '../../utils/validateUtils';
+import { isValidEmail, isValidPassword, passwordValidationErrors } from '../../utils/validationUtils';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ const SignupPage = () => {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
+        credentials: 'include'
       });
 
       const data = await resp.json();
