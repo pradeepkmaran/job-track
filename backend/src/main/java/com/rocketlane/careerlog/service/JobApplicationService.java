@@ -38,8 +38,9 @@ public class JobApplicationService {
         this.userRepository=userRepository;
     }
 
-    public List<JobApplicationDTO> getAllApplications(String username) {
-        return jobApplicationRepository.findJobApplicationsByUsername(username)
+    public List<JobApplicationDTO> getAllApplications(HttpSession session) {
+        SessionInfo sessionInfo = sessionService.getSessionDetails(session);
+        return jobApplicationRepository.findJobApplicationsByUsername(sessionInfo.getUsername())
                 .stream()
                 .map(JobApplicationMapper::toDTO)
                 .collect(Collectors.toList());
@@ -60,20 +61,15 @@ public class JobApplicationService {
         JobApplicationEntity jobApplication = JobApplicationMapper.toEntity(jobApplicationDTO);
         JobApplicationEntity savedApplication = jobApplicationRepository.save(jobApplication);
 
-//        SessionInfo sessionInfo = sessionService.getSessionDetails(session);
+       SessionInfo sessionInfo = sessionService.getSessionDetails(session);
 
-//        UserEntity userEntity = userRepository.findByUsername(sessionInfo.getUsername())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
+       UserEntity userEntity = userRepository.findByUsername(sessionInfo.getUsername())
+               .orElseThrow(() -> new RuntimeException("User not found"));
 
-        UserEntity userEntity = userRepository.findByUsername(jobApplicationDTO.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        OwnershipDTO ownershipDTO = new OwnershipDTO(jobApplicationDTO.getUsername(), savedApplication.getId());
+        OwnershipDTO ownershipDTO = new OwnershipDTO(sessionInfo.getUsername(), savedApplication.getId());
         OwnershipEntity ownershipEntity = OwnershipMapper.toEntity(ownershipDTO, userEntity, savedApplication);
         ownershipRepository.save(ownershipEntity);
 
         return JobApplicationMapper.toDTO(savedApplication);
     }
-
-
 }

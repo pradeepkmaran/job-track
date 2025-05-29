@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/application")
 public class JobApplicationController {
+
     JobApplicationService jobApplicationService;
     SessionService sessionService;
     @Autowired
@@ -39,13 +40,13 @@ public class JobApplicationController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<JobApplicationDTO> updateApplicationById(@PathVariable Long id, @RequestBody JobApplicationDTO jobApplicationDTO) {
-        return ResponseEntity.ok(jobApplicationService.updateApplicationById(id, jobApplicationDTO));
-    }
-
     @PostMapping("/new")
     public ResponseEntity<JobApplicationDTO> addApplication(@RequestBody JobApplicationDTO jobApplicationDTO, HttpSession session) {
         return ResponseEntity.ok(jobApplicationService.addApplication(jobApplicationDTO, session));
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<JobApplicationDTO> updateApplicationById(@PathVariable Long id, @RequestBody JobApplicationDTO jobApplicationDTO) {
+        return ResponseEntity.ok(jobApplicationService.updateApplicationById(id, jobApplicationDTO));
+    }
 }
+
