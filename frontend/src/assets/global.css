@@ -1,0 +1,53 @@
+body {
+    background: #d4d4d4;
+    background: radial-gradient(circle, rgba(212, 212, 212, 1) 0%, rgba(148, 187, 233, 0.5) 100%);
+    font-family: Verdana, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+input, label, button, textarea {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(148, 188, 233);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 10px;
+    max-width: 300px;
+    align-self: center;
+}
+
+button:hover {
+    background-color:  rgb(108, 137, 170);
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(254, 254, 254);
+    border-radius: 15px;
+    flex-wrap: wrap;
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.box p, label{
+    margin : 20px;
+    
+}
+
+.box input {
+    display: inline;
+}

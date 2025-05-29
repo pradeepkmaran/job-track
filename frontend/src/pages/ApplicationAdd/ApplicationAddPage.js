@@ -7,17 +7,17 @@ function ApplicationAddPage() {
   const user = useSelector((state) => state.auth.user);
     const [application, setApplication] = useState({
         id: null,
-        company_name:"sdsdf",
-        location:"sdfadf",
+        company_name:"",
+        location:"",
         date_applied:"",
-        status:"sdf",
-        role:"sdf",
-        career_site_link:"sd",
-        pay:1010,
+        status:"",
+        role:"",
+        career_site_link:"",
+        pay: null,
         deadline_to_apply:"",
-        notes:"df",
-        source:"as",
-        username: "alice"
+        notes:"",
+        source:"",
+        username: null
     });
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -26,7 +26,7 @@ function ApplicationAddPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(application);
-        await fetch("http://localhost:8080/api/v1/application/new", {
+        await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/new`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

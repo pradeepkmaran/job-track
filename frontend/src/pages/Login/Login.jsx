@@ -55,7 +55,7 @@ const LoginPage = () => {
 
       dispatch(loginSuccess(data));
       setError('');
-      navigate('/stats');
+      navigate('/');
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }

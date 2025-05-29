@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @RestController
 @RequestMapping("/api/v1/application")
 public class JobApplicationController {
@@ -27,10 +29,10 @@ public class JobApplicationController {
     @GetMapping("/all")
     public ResponseEntity<List<JobApplicationDTO>> getAllApplications(HttpSession session) {
         SessionInfo sessionInfo = sessionService.getSessionDetails(session);
-        if(sessionInfo.getUsername().isEmpty() || sessionInfo.getEmail().isEmpty()) {
-            return ResponseEntity.status(400).body(List.of());
+        if(sessionInfo.getUsername()==null || sessionInfo.getEmail()==null) {
+            return ResponseEntity.status(401).body(List.of());
         }
-        return ResponseEntity.ok(jobApplicationService.getAllApplications(sessionInfo.getUsername()));
+        return ResponseEntity.ok(jobApplicationService.getAllApplications(session));
     }
 
     @GetMapping("/{id}")
