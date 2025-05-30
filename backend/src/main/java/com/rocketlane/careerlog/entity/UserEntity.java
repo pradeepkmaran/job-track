@@ -30,5 +30,4 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OwnershipEntity> ownerships = new ArrayList<>();
-
 }

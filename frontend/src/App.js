@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Stats from './pages/Stats/Stats';
-import DashboardPage from './pages/Dashboard/Dashboard';
+// import Dashboard from './pages/Dashboard/Dashboard';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 import ApplicationDetailsPage from './pages/ApplicationDetails/ApplicationDetailsPage';
 
 import ApplicationEditPage from './pages/ApplicationSave/ApplicationEditPage';
@@ -66,7 +67,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route element={<AppLayout />}>
-        <Route path="/" element={<ProtectedRoute user={user}><DashboardPage /></ProtectedRoute>} />
+        {/* <Route path="/" element={<ProtectedRoute user={user}><Dashboard /></ProtectedRoute>} /> */}
+        <Route path="/" element={<ProtectedRoute user={user}><DashboardPage/></ProtectedRoute>} />
         <Route path="/application/new" element={<ProtectedRoute user={user}><ApplicationAddPage /></ProtectedRoute>} />
         <Route path="/application/:id" element={<ProtectedRoute user={user}><ApplicationDetailsPage /></ProtectedRoute>} />
         <Route path="/application/:id/edit" element={<ProtectedRoute user={user}><ApplicationEditPage /></ProtectedRoute>} />

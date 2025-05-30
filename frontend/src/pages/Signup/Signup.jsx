@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginSuccess } from '../../store/authSlice';
 import './Signup.css';
 import { isValidEmail, isValidPassword, passwordValidationErrors } from '../../utils/validationUtils';
+import toast from 'react-hot-toast';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -41,13 +42,16 @@ const SignupPage = () => {
       const data = await resp.json();
 
       if (!data.success) {
+        toast.error(data.message || 'Signup failed');
         setError(data.message || 'Signup failed');
         return;
       }
 
+      toast.success('Signup successful! Redirecting to stats...');
       dispatch(loginSuccess(data));
       navigate('/stats');
     } catch (err) {
+      toast.error('Something went wrong. Please try again.');
       setError('Something went wrong. Please try again.');
     }
   };

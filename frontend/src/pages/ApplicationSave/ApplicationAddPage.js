@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import ApplicationSavePage from './ApplicationSavePage';
+import toast from 'react-hot-toast';
 
 function ApplicationAddPage() {
 
@@ -35,6 +36,7 @@ function ApplicationAddPage() {
             body: JSON.stringify(application)
         });
         if(resp.ok) {
+            toast.success("Application added successfully");
             setApplication({
                 company_name: "",
                 location: "",
@@ -50,6 +52,7 @@ function ApplicationAddPage() {
             });
             navigate('/')
         } else {
+            toast.error("Failed to add application");
             console.error("Failed to add application");
         } 
     }

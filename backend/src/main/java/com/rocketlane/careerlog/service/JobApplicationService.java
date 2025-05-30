@@ -85,4 +85,12 @@ public class JobApplicationService {
 
         return JobApplicationMapper.toDTO(savedApplication);
     }
+
+    public List<String> getApplicationSources() {
+        return jobApplicationRepository.findApplicationSources();
+    }
+
+    public List<String> getApplicationStatuses() {
+        return jobApplicationRepository.findApplicationStatuses();
+    }
 }

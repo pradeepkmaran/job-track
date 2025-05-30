@@ -2,6 +2,7 @@ package com.rocketlane.careerlog.repository;
 
 import com.rocketlane.careerlog.entity.JobApplicationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,4 +27,11 @@ public interface JobApplicationRepository extends JpaRepository<JobApplicationEn
     int findPageCount(@Param("username") String username);
 
     JobApplicationEntity findJobApplicationById(Long id);
+
+    @Query(value = "SELECT DISTINCT ja.source FROM job_applications ja", nativeQuery = true)
+    List<String> findApplicationSources();
+
+    @Query(value = "SELECT DISTINCT ja.status FROM job_applications ja", nativeQuery = true)
+    List<String> findApplicationStatuses();
+
 }

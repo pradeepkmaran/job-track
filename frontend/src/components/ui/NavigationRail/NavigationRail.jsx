@@ -11,6 +11,7 @@ import { logout } from '../../../store/authSlice';
 import Cookies from 'js-cookie';
 
 const navItems = [
+  // { icon: <DashboardIcon />, path: '/', label: 'Dashboard' },
   { icon: <DashboardIcon />, path: '/', label: 'Dashboard' },
   { icon: <ArticleIcon />, path: '/application/new', label: 'New Application' },
   { icon: <AssessmentIcon />, path: '/stats', label:  'Stats' },

@@ -50,6 +50,7 @@ const LoginPage = () => {
       const data = await resp.json();
 
       if (!data.success) {
+        toast.error(data.message || 'Login failed');
         setError(data.message || 'Login failed');
         return;
       }
@@ -59,6 +60,7 @@ const LoginPage = () => {
       navigate('/');
       toast.success('Login successful!');
     } catch (err) {
+      toast.error('Login failed. Please try again.');
       setError('Something went wrong. Please try again.');
     }
   };

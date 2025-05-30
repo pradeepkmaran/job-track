@@ -5,7 +5,7 @@ import styles from './DashboardPage.module.css';
 import Filter from './Filter';
 
 
-function DashboardPage() {
+function Dashboard() {
     const [applications, setApplications] = useState([]);
     const [filteredApplications, setFilteredApplications] = useState([]);
     const [selectedStatuses, setSelectedStatuses] = useState([]);
@@ -65,7 +65,7 @@ function DashboardPage() {
     }, [searchQuery, applications]);
 
     return (
-        <div className={styles.DashboardPage}>
+        <div className={styles.Dashboard}>
             {loading ? (
                 <p>Loading...</p>
             ) : (
@@ -83,4 +83,4 @@ function DashboardPage() {
         </div>
     );
 }
-export default DashboardPage;
+export default Dashboard;
