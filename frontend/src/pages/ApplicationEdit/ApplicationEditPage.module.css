@@ -21,6 +21,7 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 32px;
+  padding-right: 40px;;
 }
 
 label {

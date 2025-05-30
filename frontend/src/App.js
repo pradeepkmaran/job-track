@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Stats from './pages/Stats/Stats';
-import DashboardPage  from './pages/Dashboard/DashBoard';
+import DashboardPage from './pages/Dashboard/DashBoard';
 import ApplicationDetailsPage from './pages/ApplicationDetails/ApplicationDetailsPage';
 import ApplicationEditPage from './pages/ApplicationEdit/ApplicationEditPage';
-import ApplicationAddPage from './pages/ApplicationAdd/ApplicationAddPage'
+import ApplicationAddPage from './pages/ApplicationAdd/ApplicationAddPage';
 import NavigationRail from './components/ui/NavigationRail/NavigationRail';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess, logout } from './store/authSlice';
-import { Navigate } from 'react-router-dom';
 
-import './assets/global.css'
+import './assets/global.css';
+
+function AppLayout() {
+  const user = useSelector((state) => state.auth.user);
+  return (
+    <>
+      {user && <NavigationRail />}
+      <Outlet />
+    </>
+  );
+}
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +38,7 @@ function App() {
 
         if (resp.ok) {
           const data = await resp.json();
-          const log = {user: data}
+          const log = { user: data };
           dispatch(loginSuccess(log));
           setLoading(false);
         } else {
@@ -42,27 +51,26 @@ function App() {
     }
 
     getSession();
-  }, [dispatch]); 
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    loading ? (
-      <div>Loading...</div>
-    ) : (
-      <BrowserRouter>
-        {user && <NavigationRail />}
-        <div >
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/" element={user ? <DashboardPage /> : <Navigate to="/login" replace />} />
-            <Route path="/application/new" element={user ? <ApplicationAddPage /> : <Navigate to='/login' replace />} />
-            <Route path="/application/:id" element={user ? <ApplicationDetailsPage /> : <Navigate to='/login' replace />} />
-            <Route path="/application/:id/edit" element={user ? <ApplicationEditPage /> : <Navigate to='/login' replace />} />
-            <Route path="/stats" element={user ? <Stats /> : <Navigate to="/login" replace />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<AppLayout />}>
+          <Route path="/" element={user ? <DashboardPage /> : <Navigate to="/login" replace />} />
+          <Route path="/application/new" element={user ? <ApplicationAddPage /> : <Navigate to='/login' replace />} />
+          <Route path="/application/:id" element={user ? <ApplicationDetailsPage /> : <Navigate to='/login' replace />} />
+          <Route path="/application/:id/edit" element={user ? <ApplicationEditPage /> : <Navigate to='/login' replace />} />
+          <Route path="/stats" element={user ? <Stats /> : <Navigate to="/login" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

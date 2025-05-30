@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ApplicationList from './ApplicationList';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { loginSuccess, logout } from '../../store/authSlice';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { loginSuccess, logout } from '../../store/authSlice';
 import styles from './DashboardPage.module.css';
 
 function DashboardPage() {
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
+    // const dispatch = useDispatch();
+    // const user = useSelector((state) => state.auth.user);
 
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);

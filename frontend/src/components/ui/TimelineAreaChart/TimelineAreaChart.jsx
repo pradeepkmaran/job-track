@@ -16,8 +16,20 @@ import {
 
 import './TimelineAreaChart.css';
 
+const VIEW_TYPES = {
+  YEARLY: "yearly",
+  MONTHLY: "monthly",
+  WEEKLY: "weekly",
+};
+
+const VIEW_OPTIONS = [
+  { value: VIEW_TYPES.YEARLY, label: "Yearly" },
+  { value: VIEW_TYPES.MONTHLY, label: "Monthly" },
+  { value: VIEW_TYPES.WEEKLY, label: "Weekly" },
+];
+
 const TimelineAreaChart = ({ data }) => {
-  const [view, setView] = useState("weekly");
+  const [view, setView] = useState(VIEW_TYPES.WEEKLY);
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
@@ -27,13 +39,13 @@ const TimelineAreaChart = ({ data }) => {
     }
 
     switch (view) {
-      case "monthly":
+      case VIEW_TYPES.MONTHLY:
         setChartData(getMonthlyCounts(data));
         break;
-      case "weekly":
+      case VIEW_TYPES.WEEKLY:
         setChartData(getWeeklyCounts(data));
         break;
-      case "yearly":
+      case VIEW_TYPES.YEARLY:
       default:
         setChartData(getYearlyCounts(data));
         break;
@@ -47,9 +59,9 @@ const TimelineAreaChart = ({ data }) => {
         onChange={(e) => setView(e.target.value)}
         style={{ marginBottom: 20, padding: "6px 12px", fontSize: 16 }}
       >
-        <option value="yearly">Yearly</option>
-        <option value="monthly">Monthly</option>
-        <option value="weekly">Weekly</option>
+        {VIEW_OPTIONS.map(option => (
+          <option key={option.value} value={option.value}>{option.label}</option>
+        ))}
       </select>
       
       <ResponsiveContainer width="100%" height={300}>

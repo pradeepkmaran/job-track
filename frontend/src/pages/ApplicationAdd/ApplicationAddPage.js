@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import styles from './ApplicationAddPage.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function ApplicationAddPage() {
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const [application, setApplication] = useState({
     id: null,
     company_name: "",
@@ -26,7 +28,7 @@ function ApplicationAddPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/new`, {
+    const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/new`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -34,6 +36,23 @@ function ApplicationAddPage() {
       credentials: 'include',
       body: JSON.stringify(application)
     });
+    if(resp.ok) {
+      setApplication({
+        id: null,
+        company_name: "",
+        location: "",
+        date_applied: "",
+        status: "",
+        role: "",
+        career_site_link: "",
+        pay: null,
+        deadline_to_apply: "",
+        notes: "",
+        source: "",
+        username: user.username || ''
+      });
+      navigate('/');  
+    }
   };
 
   return (

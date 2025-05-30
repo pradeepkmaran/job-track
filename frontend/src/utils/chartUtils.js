@@ -21,6 +21,12 @@ export function getWeeklyCounts(data) {
     const tmpDate = new Date(date);
     tmpDate.setHours(0, 0, 0, 0);
 
+    // day 0 is Sunday, 1 is Monday, ...6 is Saturday
+    // Adjust to get the first week of the year
+    // ISO week starts on Monday
+    // The first week of the year is the week with the first Thursday
+    // or the week containing January 4th
+
     tmpDate.setDate(tmpDate.getDate() + 3 - ((tmpDate.getDay() + 6) % 7));
     const week1 = new Date(tmpDate.getFullYear(), 0, 4);
     const weekNumber = 1 + Math.round(((tmpDate.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);

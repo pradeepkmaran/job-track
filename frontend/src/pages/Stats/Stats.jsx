@@ -1,8 +1,5 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../store/authSlice';
 import TimelineAreaChart from "../../components/ui/TimelineAreaChart/TimelineAreaChart";
 import StatusPieChart from "../../components/ui/StatusPieChart/StatusPieChart";
 import SourceStatusBarChart from "../../components/ui/SourceStatusBarChart/SourceStatusBarChart";
@@ -12,8 +9,6 @@ import './Stats.css';
 
 const Stats = () => {
   const user = useSelector((state) => state.auth.user);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
@@ -22,9 +17,9 @@ const Stats = () => {
 
       try {
         const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/all`, {
-            method: 'GET',
-            credentials: 'include'
-          }
+          method: 'GET',
+          credentials: 'include'
+        }
         );
 
         if (!resp.ok) {
@@ -42,20 +37,7 @@ const Stats = () => {
     fetchData();
   }, [user]);
 
-  const handleLogout = async () => {
-    const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/session/logout`, {
-      method: "POST",
-      credentials: "include"
-    })
-    const data = await resp.json();
-    
-    if(data.username && data.email) {
-      return;
-    }
 
-    dispatch(logout);
-    navigate('/login');
-  }
 
   return (
     <div className="stats-layout-wrapper">
