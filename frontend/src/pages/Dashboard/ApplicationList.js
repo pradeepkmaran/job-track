@@ -24,7 +24,7 @@ function ApplicationList({ applications }) {
                     </div>
                     <div className={styles.cardDetails}>
                         <div><strong>Role:</strong> {app.role}</div>
-                        <div><strong>Date:</strong> {app.date_applied}</div>
+                        <div><strong>Date:</strong> {new Date(app.date_applied).toLocaleDateString()}</div>
                     </div>
                 </div>
             ))}

@@ -3,17 +3,13 @@ import ApplicationList from './ApplicationList';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './DashboardPage.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { loginSuccess, logout } from '../../store/authSlice';
+import { useSelector, useDispatch } from 'react-redux'
 import Filter from './Filter';
 
 
 function DashboardPage() {
-    const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const allStatuses = ["rejected", "interviewed", "applied", "offer", "not applied"];
-
-    console.log(user);
     const [applications, setApplications] = useState([]);
     const [filteredApplications, setFilteredApplications] = useState([]);
     const [selectedStatuses, setSelectedStatuses] = useState([]);
@@ -52,7 +48,6 @@ function DashboardPage() {
     const handlePrev = () => setPage(prev => Math.max(1, prev - 1));
     const handleNext = () => setPage(prev => Math.min(pageCount, prev + 1));
 
-    //handling filter
     useEffect(() => {
         if(selectedStatuses.length === 0) 
             setFilteredApplications(applications);
@@ -65,11 +60,12 @@ function DashboardPage() {
         }
     }, [selectedStatuses, applications]);
 
-    //handling search
     useEffect(() => {
         if(searchQuery.trim()!==''){
             setFilteredApplications(applications.filter(
-                app => app.company_name.toLowerCase().includes(searchQuery.toLowerCase())))
+                app => app.company_name?.toLowerCase().includes(searchQuery.toLowerCase()) || app.role?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                app.status?.toLowerCase().includes(searchQuery.toLowerCase())
+            ))
         }
     }, [searchQuery, applications]);
 
@@ -83,9 +79,8 @@ function DashboardPage() {
                 <p>Loading...</p>
             ) : (
                 <>
-                    <input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
-                    <button onClick={handleAdd}>Add Application</button> 
-                    <Filter selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} allStatuses={allStatuses}/>
+                    <input className={styles.searchInput} type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+                    <Filter className={styles.filterChip} selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} allStatuses={allStatuses}/>
                     <ApplicationList applications={filteredApplications} />
                     <div className={styles.pagination}>
                         <button onClick={handlePrev} disabled={page === 1}>Previous</button>

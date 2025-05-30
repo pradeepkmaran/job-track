@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ApplicationSavePage from './ApplicationSavePage';
-
 function ApplicationEditPage() { 
     const {id} = useParams();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const [application, setApplication] = useState(null);
 
@@ -21,7 +21,7 @@ function ApplicationEditPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(application);
-        await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/${id}`, {
+        const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -29,6 +29,21 @@ function ApplicationEditPage() {
             credentials: 'include',
             body: JSON.stringify(application)
         })
+        if(resp.ok) {
+            setApplication({
+                company_name: "",
+                location: "",
+                date_applied: "",
+                status: "",
+                role: "",
+                career_site_link: "",
+                pay: null,
+                deadline_to_apply: "",
+                notes: "",
+                source: ""
+            });
+            navigate('/');
+        }       
     }
 
     return (
