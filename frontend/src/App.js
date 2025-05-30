@@ -5,8 +5,9 @@ import Signup from './pages/Signup/Signup';
 import Stats from './pages/Stats/Stats';
 import DashboardPage from './pages/Dashboard/Dashboard';
 import ApplicationDetailsPage from './pages/ApplicationDetails/ApplicationDetailsPage';
-import ApplicationEditPage from './pages/ApplicationEdit/ApplicationEditPage';
-import ApplicationAddPage from './pages/ApplicationAdd/ApplicationAddPage';
+
+import ApplicationEditPage from './pages/ApplicationSave/ApplicationEditPage';
+import ApplicationAddPage from './pages/ApplicationSave/ApplicationAddPage';
 import NavigationRail from './components/ui/NavigationRail/NavigationRail';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess, logout } from './store/authSlice';
@@ -27,7 +28,6 @@ function AppLayout() {
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  console.log('User in App:', user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
