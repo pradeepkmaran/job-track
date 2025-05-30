@@ -1,4 +1,3 @@
-import { memo } from "react";
 import {
   PieChart,
   Pie,
@@ -20,6 +19,7 @@ const COLORS = [
 ];
 
 const StatusPieChart = ({ data }) => {
+
   if (!data || !data.length) return <p>No data to display</p>;
 
   const statusCounts = data.reduce((acc, item) => {

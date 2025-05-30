@@ -1,9 +1,14 @@
 import styles from './Filter.module.css';
+import { useApplicationOptions } from '../../utils/useApplicationOptions';
 
-function Filter({ selectedStatuses, setSelectedStatuses, allStatuses }) {
+function Filter({ selectedStatuses, setSelectedStatuses }) {
+  const { statusOptions, loading } = useApplicationOptions();
+
   function handleChange(e) {
     setSelectedStatuses(e.target.value === "all" ? [] : [e.target.value]);
   }
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className={styles.filter}>
@@ -20,20 +25,20 @@ function Filter({ selectedStatuses, setSelectedStatuses, allStatuses }) {
         />
         <label htmlFor="all">All</label>
       </div>
-      {allStatuses.map(status => (
+      {statusOptions.filter(opt => opt).map(opt => (
         <div
-          className={`${styles.filterStatus} ${selectedStatuses[0] === status ? styles.filterStatusSelected : ""}`}
-          key={status}
+          className={`${styles.filterStatus} ${selectedStatuses[0] === opt ? styles.filterStatusSelected : ""}`}
+          key={opt}
         >
           <input
             type="radio"
             name="status"
-            value={status}
-            id={status}
-            checked={selectedStatuses[0] === status}
+            value={opt}
+            id={opt}
+            checked={selectedStatuses[0] === opt}
             onChange={handleChange}
           />
-          <label htmlFor={status}>{status}</label>
+          <label htmlFor={opt}>{opt}</label>
         </div>
       ))}
     </div>

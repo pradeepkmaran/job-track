@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ApplicationDetailsPage.css';
+import { useApplicationOptions } from '../../utils/useApplicationOptions';
 
 function ApplicationDetailsPage() {
   const { id } = useParams();
@@ -9,7 +10,7 @@ function ApplicationDetailsPage() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-
+  const { statusOptions, sourceOptions } = useApplicationOptions();
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/${id}`)
@@ -19,12 +20,14 @@ function ApplicationDetailsPage() {
         setLoading(false);
       })
       .catch(error => console.log(error))
-  }, []);
+  }, [id]);
 
   const handleEdit = (id) => {
     navigate('/application/' + id + '/edit')
   }
 
+  const getStatusLabel = (value) => statusOptions.find(opt => opt.value === value)?.label || value;
+  const getSourceLabel = (value) => sourceOptions.find(opt => opt.value === value)?.label || value;
 
   return (
     <div className="applicationDetailsPage">
@@ -32,18 +35,18 @@ function ApplicationDetailsPage() {
       {!loading && application && (
         <div className="box details">
           <h2>{application.company_name}</h2>
-          <p><strong>Status:</strong> {application.status}</p>
+          <p><strong>Status:</strong> {getStatusLabel(application.status)}</p>
           <p><strong>Location:</strong> {application.location}</p>
-          <p><strong>Date Applied:</strong> {application.date_applied}</p>
+          <p><strong>Date Applied:</strong> {new Date(application.date_applied).toLocaleDateString('en-IN')}</p>
           <p><strong>Role:</strong> {application.role}</p>
           <p><strong>Career Site: </strong>
             <a href={application.career_site_link} target="_blank" rel="noopener noreferrer">
               {application.career_site_link}
             </a>
           </p>
-          <p><strong>Pay:</strong> Rs. {application.pay}</p>
-          <p><strong>Deadline to Apply:</strong> {application.deadline_to_apply || 'N/A'}</p>
-          <p><strong>Source:</strong> {application.source}</p>
+          <p><strong>Pay:</strong> Rs. {application.pay.toLocaleString('en-IN')}</p>
+          <p><strong>Deadline to Apply:</strong> {new Date(application.deadline_to_apply).toLocaleDateString('en-IN') || 'N/A'}</p>
+          <p><strong>Source:</strong> {getSourceLabel(application.source)}</p>
           <p><strong>Notes:</strong> {application.notes}</p>
 
           <button onClick={() => handleEdit(application.id)}>Edit</button>

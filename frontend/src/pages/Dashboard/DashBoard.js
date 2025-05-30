@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ApplicationList from './ApplicationList';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import styles from './DashboardPage.module.css';
-import { useSelector, useDispatch } from 'react-redux'
 import Filter from './Filter';
 
 
 function DashboardPage() {
-    const user = useSelector((state) => state.auth.user);
-    const allStatuses = ["rejected", "interviewed", "applied", "offer", "not applied"];
     const [applications, setApplications] = useState([]);
     const [filteredApplications, setFilteredApplications] = useState([]);
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
-    const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
 
@@ -55,7 +50,7 @@ function DashboardPage() {
         {
             console.log("stats", selectedStatuses);
             setFilteredApplications( 
-                applications.filter( application =>  selectedStatuses.includes(application.status.toLowerCase()) )
+                applications.filter( application =>  selectedStatuses.includes(application.status) )
             )   
         }
     }, [selectedStatuses, applications]);
@@ -69,10 +64,6 @@ function DashboardPage() {
         }
     }, [searchQuery, applications]);
 
-    function handleAdd(){
-        navigate("/application/new")
-    }
-
     return (
         <div className={styles.DashboardPage}>
             {loading ? (
@@ -80,7 +71,7 @@ function DashboardPage() {
             ) : (
                 <>
                     <input className={styles.searchInput} type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
-                    <Filter className={styles.filterChip} selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} allStatuses={allStatuses}/>
+                    <Filter className={styles.filterChip} selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} />
                     <ApplicationList applications={filteredApplications} />
                     <div className={styles.pagination}>
                         <button onClick={handlePrev} disabled={page === 1}>Previous</button>

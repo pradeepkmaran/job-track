@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Stats from './pages/Stats/Stats';
@@ -14,6 +14,7 @@ import { loginSuccess, logout } from './store/authSlice';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import './assets/global.css';
+import { Toaster } from 'react-hot-toast';
 
 function AppLayout() {
   const user = useSelector((state) => state.auth.user);
@@ -72,6 +73,9 @@ function App() {
         <Route path="/stats" element={<ProtectedRoute user={user}><Stats /></ProtectedRoute>} />
       </Route>
     </Routes>
+    <Toaster  
+      position="bottom-right"
+      reverseOrder={false}/>
   </BrowserRouter>
 
   );

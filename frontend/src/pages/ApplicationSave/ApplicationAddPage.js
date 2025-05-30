@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { useDispatch } from 'react-redux';
 import ApplicationSavePage from './ApplicationSavePage';
 
 function ApplicationAddPage() {

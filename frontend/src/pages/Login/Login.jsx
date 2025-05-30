@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginSuccess } from '../../store/authSlice';
 import { isValidEmail } from '../../utils/validationUtils';
 import './Login.css';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const LoginPage = () => {
       dispatch(loginSuccess(data));
       setError('');
       navigate('/');
+      toast.success('Login successful!');
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }

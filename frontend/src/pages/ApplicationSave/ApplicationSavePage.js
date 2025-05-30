@@ -1,33 +1,18 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import styles from './ApplicationSavePage.module.css';
-
-const STATUS_OPTIONS = [
-  { value: '', label: 'Select status' },
-  { value: 'Rejected', label: 'Rejected' },
-  { value: 'Interviewed', label: 'Interviewed' },
-  { value: 'Offer', label: 'Offer' },
-  { value: 'Applied', label: 'Applied' },
-  { value: 'Not Applied', label: 'Not Applied' },
-];
-
-const SOURCE_OPTIONS = [
-  { value: '', label: 'Select source' },
-  { value: 'LinkedIn', label: 'LinkedIn' },
-  { value: 'Glassdoor', label: 'Glassdoor' },
-  { value: 'Indeed', label: 'Indeed' },
-  { value: 'Referral', label: 'Referral' },
-  { value: 'Company Website', label: 'Company Website' },
-  { value: 'Other', label: 'Other' },
-];
+import { useApplicationOptions } from '../../utils/useApplicationOptions';
 
 export default function ApplicationSavePage({ application, setApplication, handleSubmit }) {
     const user = useSelector((state) => state.auth.user);
+    const { statusOptions, sourceOptions, loading } = useApplicationOptions();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setApplication(prev => ({ ...prev, [name]: value }));
     };
+
+    if (loading) return <div>Loading...</div>;
 
     return (
         <div className={styles.ApplicationSavePage}>
@@ -50,8 +35,9 @@ export default function ApplicationSavePage({ application, setApplication, handl
                         value={application.status}
                         onChange={handleChange}
                     >
-                        {STATUS_OPTIONS.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        <option value="">Select status</option>
+                        {statusOptions.map(opt => (
+                            <option key={opt} value={opt}>{opt}</option>
                         ))}
                     </select>
 
@@ -78,8 +64,9 @@ export default function ApplicationSavePage({ application, setApplication, handl
                         value={application.source}
                         onChange={handleChange}
                     >
-                        {SOURCE_OPTIONS.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        <option value="">Select source</option>
+                        {sourceOptions.map(opt => (
+                            <option key={opt} value={opt}>{opt}</option>
                         ))}
                     </select>
 
