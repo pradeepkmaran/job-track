@@ -1,4 +1,3 @@
-
 import {
   BarChart,
   Bar,
@@ -11,17 +10,22 @@ import {
 } from 'recharts';
 import { aggregateBySourceAndStatus } from '../../../utils/chartUtils';
 
+// Use consistent status keys as in your app
 const statusColors = {
-  Applied: '#8884d8',
-  Interview: '#82ca9d',
-  Offer: '#ffc658',
-  Rejected: '#ff6b6b',
+  'Not Applied': '#FF8042',
+  'Applied': '#8884d8',
+  'Interviewed': '#82ca9d',
+  'Offer': '#ffc658',
+  'Rejected': '#ff6b6b',
 };
 
 const statuses = Object.keys(statusColors);
 
 const SourceStatusBarChart = ({ data }) => {
-  const chartData = aggregateBySourceAndStatus(data);
+  if (!data || !data.length) return <p>No data to display</p>;
+
+  // Aggregate data by source and status
+  const chartData = aggregateBySourceAndStatus(data, statuses);
 
   return (
     <ResponsiveContainer width="100%" height={400}>
@@ -39,9 +43,7 @@ const SourceStatusBarChart = ({ data }) => {
             key={status}
             dataKey={status}
             fill={statusColors[status]}
-            // For grouped bars, do NOT set stackId
-            // Uncomment the next line if you want stacked bars instead
-            stackId="a"
+            stackId="a" // stacked bars for better comparison
           />
         ))}
       </BarChart>

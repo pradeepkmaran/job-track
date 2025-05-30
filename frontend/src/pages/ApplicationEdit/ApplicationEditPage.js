@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from "react-redux";
 import styles from './ApplicationEditPage.module.css';
 
 function ApplicationEditPage() {
     const { id } = useParams();
-    const user = useSelector((state) => state.auth.user);
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [application, setApplication] = useState({
         company_name: "",
@@ -38,7 +37,7 @@ function ApplicationEditPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(application);
-        await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/${id}`, {
+        const resp = await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/application/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -46,6 +45,21 @@ function ApplicationEditPage() {
             credentials: 'include',
             body: JSON.stringify(application)
         })
+        if(resp.ok) {
+            setApplication({
+                company_name: "",
+                location: "",
+                date_applied: "",
+                status: "",
+                role: "",
+                career_site_link: "",
+                pay: "",
+                deadline_to_apply: "",
+                notes: "",
+                source: "",
+            });
+            navigate(`/`);
+        }
     }
 
     return (
@@ -65,7 +79,14 @@ function ApplicationEditPage() {
                         <input name="date_applied" type="date" value={application.date_applied} onChange={handleChange} />
 
                         <label>Status</label>
-                        <input name="status" value={application.status} onChange={handleChange} />
+                        <select id="status" name="status" value={application.status} onChange={handleChange}>
+                            <option value="">Select status</option>
+                            <option value="Not Applied">Not Applied</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Interviewed">Interviewed</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
 
                         <label>Role</label>
                         <input name="role" value={application.role} onChange={handleChange} />

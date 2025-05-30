@@ -82,6 +82,32 @@
   border: 1px solid #e5e7eb;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 32px 0 0 0;
+}
+
+.pagination button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pagination button:disabled {
+  background: #cbd5e1;
+  color: #888;
+  cursor: not-allowed;
+}
+
 @media (max-width: 700px) {
   .DashboardPage {
     padding: 12px 2vw;

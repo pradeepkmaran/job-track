@@ -77,29 +77,24 @@ export function getStatusCounts(data) {
     .map(([status, count]) => ({ name: status, value: count }));
 }
 
-export function aggregateBySourceAndStatus(applications) {
-  const statuses = ["Applied", "Interview", "Offer", "Rejected"];
-
-  const sourceStatusMap = {};
-
-  applications.forEach((appl) => {
-    let source = appl.source;
-    let status = appl.status;
-    if (!source) {
-      source = "Unknown";
+export function aggregateBySourceAndStatus(data, statuses) {
+  const result = {};
+  data.forEach(item => {
+    const source = item.source || 'Unknown';
+    const status = item.status || 'Unknown';
+    if (!result[source]) {
+      result[source] = {};
+      statuses.forEach(s => { result[source][s] = 0; });
     }
-
-    if (!sourceStatusMap[source]) {
-      sourceStatusMap[source] = { source };
-      statuses.forEach((s) => (sourceStatusMap[source][s] = 0));
-    }
-
     if (statuses.includes(status)) {
-      sourceStatusMap[source][status]++;
+      result[source][status] += 1;
     }
   });
-
-  return Object.values(sourceStatusMap);
+  // Convert to array for recharts
+  return Object.entries(result).map(([source, counts]) => ({
+    source,
+    ...counts,
+  }));
 }
 
 export function getSortedOffers(data) {

@@ -11,8 +11,8 @@ import { logout } from '../../../store/authSlice';
 
 const navItems = [
   { icon: <DashboardIcon />, path: '/', label: 'Dashboard' },
-  { icon: <ArticleIcon />, path: '/application/new', label: 'Applications' },
-  { icon: <AssessmentIcon />, path: '/stats', label: 'Stats' },
+  { icon: <ArticleIcon />, path: '/application/new', label: 'New Application' },
+  { icon: <AssessmentIcon />, path: '/stats', label:  'Stats' },
 ];
 
 export default function NavigationRail() {

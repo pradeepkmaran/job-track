@@ -46,6 +46,19 @@ public class JobApplicationService {
                 .collect(Collectors.toList());
     }
 
+    public int getPageCount(String username) {
+        int applicationsCount = jobApplicationRepository.findPageCount(username);
+        int pageCount = (applicationsCount+9)/10;
+        return pageCount;
+    }
+
+    public List<JobApplicationDTO> getPagedApplications(int pageno, String username) {
+        return jobApplicationRepository.findJobApplicationsByUsernameWithPageno(username, 10, ((pageno-1)*10))
+                .stream()
+                .map(JobApplicationMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public Optional<JobApplicationDTO> getApplicationById(Long id) {
         return jobApplicationRepository.findById(id)
                 .map(JobApplicationMapper::toDTO);
