@@ -1,3 +1,68 @@
-.details {
-    background-color: rgb(254, 254, 254) !important;
+.applicationDetailsPage {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+}
+
+.box.details {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 36px 44px;
+  min-width: 340px;
+  max-width: 520px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.box.details h2 {
+  margin-bottom: 18px;
+  font-size: 2rem;
+  color: #222;
+  font-weight: 700;
+}
+
+.box.details p {
+  margin: 10px 0;
+  font-size: 1.08rem;
+  color: #333;
+}
+
+.box.details strong {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.box.details a {
+  color: #2563eb;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.box.details button {
+  margin-top: 24px;
+  padding: 12px 0;
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.box.details button:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 700px) {
+  .box.details {
+    padding: 18px 8px;
+    min-width: unset;
+    max-width: 98vw;
+  }
 }

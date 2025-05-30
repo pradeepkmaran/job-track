@@ -12,7 +12,7 @@ import { aggregateBySourceAndStatus } from '../../../utils/chartUtils';
 
 // Use consistent status keys as in your app
 const statusColors = {
-  'Not Applied': '#FF8042',
+  'Not Applied': '#AA47BC',
   'Applied': '#8884d8',
   'Interviewed': '#82ca9d',
   'Offer': '#ffc658',

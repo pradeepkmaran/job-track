@@ -10,6 +10,7 @@ import ApplicationAddPage from './pages/ApplicationAdd/ApplicationAddPage';
 import NavigationRail from './components/ui/NavigationRail/NavigationRail';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess, logout } from './store/authSlice';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import './assets/global.css';
 
@@ -26,6 +27,7 @@ function AppLayout() {
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  console.log('User in App:', user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,19 +60,20 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route element={<AppLayout />}>
-          <Route path="/" element={user ? <DashboardPage /> : <Navigate to="/login" replace />} />
-          <Route path="/application/new" element={user ? <ApplicationAddPage /> : <Navigate to='/login' replace />} />
-          <Route path="/application/:id" element={user ? <ApplicationDetailsPage /> : <Navigate to='/login' replace />} />
-          <Route path="/application/:id/edit" element={user ? <ApplicationEditPage /> : <Navigate to='/login' replace />} />
-          <Route path="/stats" element={user ? <Stats /> : <Navigate to="/login" replace />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<ProtectedRoute user={user}><DashboardPage /></ProtectedRoute>} />
+        <Route path="/application/new" element={<ProtectedRoute user={user}><ApplicationAddPage /></ProtectedRoute>} />
+        <Route path="/application/:id" element={<ProtectedRoute user={user}><ApplicationDetailsPage /></ProtectedRoute>} />
+        <Route path="/application/:id/edit" element={<ProtectedRoute user={user}><ApplicationEditPage /></ProtectedRoute>} />
+        <Route path="/stats" element={<ProtectedRoute user={user}><Stats /></ProtectedRoute>} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+
   );
 }
 

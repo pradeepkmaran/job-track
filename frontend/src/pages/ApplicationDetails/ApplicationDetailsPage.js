@@ -36,7 +36,7 @@ function ApplicationDetailsPage() {
           <p><strong>Location:</strong> {application.location}</p>
           <p><strong>Date Applied:</strong> {application.date_applied}</p>
           <p><strong>Role:</strong> {application.role}</p>
-          <p><strong>Career Site:</strong>
+          <p><strong>Career Site: </strong>
             <a href={application.career_site_link} target="_blank" rel="noopener noreferrer">
               {application.career_site_link}
             </a>

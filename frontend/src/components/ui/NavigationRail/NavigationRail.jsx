@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../store/authSlice';
+import Cookies from 'js-cookie';
 
 const navItems = [
   { icon: <DashboardIcon />, path: '/', label: 'Dashboard' },
@@ -19,8 +20,13 @@ export default function NavigationRail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await fetch(`${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include',
+    });
     dispatch(logout());
+    Cookies.remove('SESSION')
     navigate('/login');
   };
 
