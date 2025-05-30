@@ -6,9 +6,8 @@ import Stats from './pages/Stats/Stats';
 
 import DashboardPage  from './pages/Dashboard/DashBoard';
 import ApplicationDetailsPage from './pages/ApplicationDetails/ApplicationDetailsPage';
-import ApplicationEditPage from './pages/ApplicationEdit/ApplicationEditPage';
-import ApplicationAddPage from './pages/ApplicationAdd/ApplicationAddPage'
-
+import ApplicationEditPage from './pages/ApplicationSave/ApplicationEditPage';
+import ApplicationAddPage from './pages/ApplicationSave/ApplicationAddPage';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess, logout } from './store/authSlice';
 import { Navigate } from 'react-router-dom';

@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Builder
 @Getter
 public class JobApplicationEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
